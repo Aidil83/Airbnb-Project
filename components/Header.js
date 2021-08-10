@@ -12,11 +12,11 @@ import "react-date-range/dist/theme/default.css"; // theme css file
 import { DateRangePicker } from "react-date-range";
 import { useRouter } from "next/dist/client/router";
 
-function Header() {
+function Header({ placeholder }) {
   const [searchInput, setSearchInput] = useState("");
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
-  const [noOfGuest, setNoOfGuest] = useState(1);
+  const [noOfGuests, setNoOfGuests] = useState(1);
   const router = useRouter();
 
   const selectionRange = {
@@ -41,7 +41,7 @@ function Header() {
         location: searchInput,
         startDate: startDate.toISOString(),
         endDate: endDate.toISOString(),
-        noOfGuest,
+        noOfGuests,
       },
     });
   };
@@ -68,7 +68,7 @@ function Header() {
           value={searchInput}
           className="flex-grow pl-5 bg-transparent outline-none text-sm text-gray-600 placeholder-gray-400"
           type="text"
-          placeholder="Start your search"
+          placeholder={placeholder || "Start your search"}
           onChange={(e) => setSearchInput(e.target.value)}
         />
         <SearchIcon className="hidden md:inline-flex h-8 bg-red-400 text-white rounded-full p-2 cursor-pointer md:mx-2" />
@@ -96,8 +96,8 @@ function Header() {
             </h2>
             <UsersIcon className="h-5" />
             <input
-              value={noOfGuest}
-              onChange={(e) => setNoOfGuest(e.target.value)}
+              value={noOfGuests}
+              onChange={(e) => setNoOfGuests(e.target.value)}
               type="number"
               min={1}
               className="w-12 pl-2 text-lg outline-none text-red-400"
